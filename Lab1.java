@@ -10,13 +10,11 @@ public class Lab1 {
         ArrayList<Integer> keywordPositions = new ArrayList<Integer>();
         
         for (int i=0; i<phraseLength; i++) {
-            ArrayList<Integer> phrasePositions = new ArrayList<Integer>();
             phrasePositions.add(letterToPosition(phrase.charAt(i), 'a'));
         }
 
-        for (int i=0; i<keywordLength; i++) {
-            ArrayList<Integer> keywordPositions = new ArrayList<Integer>();
-            keywordPositions.add(letterToPosition(keyword.charAt(i), 'a'));
+        for (int j=0; j<keywordLength; j++) {
+            keywordPositions.add(letterToPosition(keyword.charAt(j), 'a'));
         }
 
         for(int k = 0; k < keywordLength; k++) {
@@ -26,6 +24,10 @@ public class Lab1 {
             else {
                 phrasePositions.set(k, keywordPositions.get(k) + phrasePositions.get(k));
             }
+        }
+
+        for (int n=0; n<phrasePositions.length(); n++) {
+            phrasePositions.set(n, positionToLetter(phrasePositions.get(n)));
         }
     }
 
