@@ -1,18 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Lab1 {
 
     public static void encryption (String phrase, String keyword) {
         int phraseLength = phrase.length();
         int keywordLength = keyword.length();
 
         for (int i=0; i<phraseLength; i++) {
-            ArrayList<Integer> phrasePositions = new Arraylist<Integer>();
+            ArrayList<Integer> phrasePositions = new ArrayList<Integer>();
             phrasePositions.add(letterPosition(phrase.charAt(i), 'a'));
         }
 
         for (int i=0; i<keywordLength; i++) {
-            ArrayList<Integer> keywordPositions = new Arraylist<Integer>();
+            ArrayList<Integer> keywordPositions = new ArrayList<Integer>();
             keywordPositions.add(letterPosition(keyword.charAt(i), 'a'));
         }
 
@@ -28,11 +29,9 @@ public class Main {
     public static void main (String[] args) {
         
         Scanner input = new Scanner(System.in);
-        String text = input.nextString();
-        text.toLowerCase();
-        text.replaceAll("[^a-zA-Z]","");
+        String text = input.nextLine().toLowerCase().replaceAll("[^a-zA-Z]","");
 
-        
+        System.out.println(text);
 
     }
     
