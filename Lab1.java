@@ -6,7 +6,9 @@ public class Lab1 {
     public static void encryption (String phrase, String keyword) {
         int phraseLength = phrase.length();
         int keywordLength = keyword.length();
-
+        ArrayList<Integer> phrasePositions = new ArrayList<Integer>();
+        ArrayList<Integer> keywordPositions = new ArrayList<Integer>();
+        
         for (int i=0; i<phraseLength; i++) {
             ArrayList<Integer> phrasePositions = new ArrayList<Integer>();
             phrasePositions.add(letterToPosition(phrase.charAt(i), 'a'));
@@ -17,6 +19,14 @@ public class Lab1 {
             keywordPositions.add(letterToPosition(keyword.charAt(i), 'a'));
         }
 
+        for(int k = 0; k < keywordLength; k++) {
+            if(k + 1 % keywordLength > 0) {
+                k = 0;
+            }
+            else {
+                phrasePositions.set(k, keywordPositions.get(k) + phrasePositions.get(k));
+            }
+        }
     }
 
     // Changes a character to its respective integer ascii value minus
