@@ -17,9 +17,9 @@ public class Lab1 {
             keywordPositions.add(letterToPosition(keyword.charAt(j), 'a'));
         }
 
-        for(int k = 0; k < keywordLength; k++) {
-            if(k + 1 % keywordLength > 0) {
-                k = 0;
+        for(int k = 0; k < phraseLength; k++) {
+            if(k >= keywordLength) {
+                phrasePositions.set(k, keywordPositions.get(k % keywordLength) + phrasePositions.get(k));
             }
             else {
                 phrasePositions.set(k, keywordPositions.get(k) + phrasePositions.get(k));
