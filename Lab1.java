@@ -98,6 +98,11 @@ public class Lab1 {
         System.out.println((letterToPosition('s') + letterToPosition('y'))%26);
         System.out.println((letterToPosition('t') + letterToPosition('w'))%26);
 
+        System.out.println(positionToLetter(3));
+        System.out.println(positionToLetter(8));
+        System.out.println(positionToLetter(16));
+        System.out.println(positionToLetter(15));
+        
         //Initializing array to test getStringEncryption()
         ArrayList<Integer> testing = new ArrayList<Integer>();
         testing.add(3);
