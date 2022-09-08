@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Lab1 {
 
@@ -8,7 +9,7 @@ public class Lab1 {
         int keywordLength = keyword.length();
         ArrayList<Integer> phrasePositions = new ArrayList<Integer>();
         ArrayList<Integer> keywordPositions = new ArrayList<Integer>();
-        ArrayList<String> encryptionArray = new ArrayList<String>();
+        ArrayList<Character> encryptionArray = new ArrayList<Character>();
         
         for (int i=0; i<phraseLength; i++) { //Creates an array to hold number values of the letters in the phrase
             phrasePositions.add(letterToPosition(phrase.charAt(i)));
@@ -25,28 +26,38 @@ public class Lab1 {
          * the beginning of keywordPositions
          * If the sums of the values in spot k of the two ArrayLists
          * is greater than 26, do modulus 26 to remain in the alphabet
+         * Convert the value of sum to a char using positionToLetter
+         * Add that value to character Arraylist encryptionArray
          */
         for(int k = 0; k < phraseLength; k++) {//Encrypts the message by adding the values in the phrase and the keyword
             //If k > keyLength, have to 'reset' k using the modulo function
             int sum; // Variable for storing the result of summing the two ArrayList values
             if(k >= keywordLength) {
                 sum = (keywordPositions.get(k % keywordLength) + phrasePositions.get(k)) % 26;
-                phrasePositions.set(k, sum);
             }
             else {
                 sum = keywordPositions.get(k) + phrasePositions.get(k);
-                phrasePositions.set(k, sum);
             }
+            encryptionArray.add(positionToLetter(sum));
         }
 
-        phrase = getStringEncryption(phrasePositions);
+        /* The first phrase equality gives an error
+         * The other two equalities give the same output, but not what we want
+         * If the keyword is 'keyword' and the phrase is 'testing'
+         * They return '~iwj'
+         */
+        //phrase = getStringEncryption(encryptionArray);
+        //phrase = encryptionArray.stream().map(Object::toString).collect(Collectors.joining(""));
+        phrase = encryptionArray.stream().map(e->e.toString()).reduce((acc, e) -> acc + e).get();
+        System.out.println(phrase);
+
     }
 
     //Method to convert from an ArrayList<Integer> to a string
-    public static String getStringEncryption(ArrayList<Integer> list) {
+    public static String getStringEncryption(ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());//Used to help build the string
-        for(Integer num: list) {
-            builder.append(positionToLetter(list.get(num)));//adds the character value of the number to the end of the string
+        for(Character ch: list) {
+            builder.append(positionToLetter(list.get(ch)));//adds the character value of the number to the end of the string
         }
         return builder.toString();//Return a toString; Will need to set equal to a string
     }
@@ -71,48 +82,12 @@ public class Lab1 {
 
     public static void main (String[] args) {
         
-        // Scanner input = new Scanner(System.in);
-        // String keyword = "keyword";
-        // System.out.print("Enter encrypted text: ");
-        // String text = input.nextLine().toLowerCase().replaceAll("[^a-zA-Z]","");
-        // System.out.println(text);
-        // encryption(text, keyword);
-        // System.out.println(text);
-
-        //Testing to try and find what exactly is wrong
-        //Testing positionToLetter and letterToPosition
-        System.out.println(letterToPosition('t'));
-        System.out.println(letterToPosition('e'));
-        System.out.println(letterToPosition('s'));
-        System.out.println(letterToPosition('t'));
-
-        System.out.println(positionToLetter(19));
-        System.out.println(positionToLetter(4));
-        System.out.println(positionToLetter(18));
-        System.out.println(positionToLetter(19));
-        //This means that both positionToLetter and letterToPosition work
-
-        //Testing to make sure our addition works
-        System.out.println((letterToPosition('t') + letterToPosition('k'))%26);
-        System.out.println((letterToPosition('e') + letterToPosition('e'))%26);
-        System.out.println((letterToPosition('s') + letterToPosition('y'))%26);
-        System.out.println((letterToPosition('t') + letterToPosition('w'))%26);
-
-        System.out.println(positionToLetter(3));
-        System.out.println(positionToLetter(8));
-        System.out.println(positionToLetter(16));
-        System.out.println(positionToLetter(15));
-        
-        //Initializing array to test getStringEncryption()
-        ArrayList<Integer> testing = new ArrayList<Integer>();
-        testing.add(3);
-        testing.add(8);
-        testing.add(16);
-        testing.add(15);
-        System.out.println(testing);
-
-        //Viewing output from getStringEncryption
-        System.out.println(getStringEncryption(testing));
+        Scanner input = new Scanner(System.in);
+        String keyword = "keyword";
+        System.out.print("Enter encrypted text: ");
+        String text = input.nextLine().toLowerCase().replaceAll("[^a-zA-Z]","");
+        System.out.println(text);
+        encryption(text, keyword);
 
     }
     
