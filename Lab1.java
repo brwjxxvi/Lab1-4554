@@ -74,7 +74,8 @@ public class Lab1 {
         System.out.print("Enter encrypted text: ");
         String text = input.nextLine().toLowerCase().replaceAll("[^a-zA-Z]","");
         System.out.println(text);
-        encryption(input, keyword);
+        encryption(text, keyword);
+        System.out.println(text);
 
     }
     
