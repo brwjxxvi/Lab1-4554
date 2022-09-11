@@ -23,25 +23,28 @@ public class Lab1 {
          * and phrasePositions ArrayLists and performing
          * modulus 26 to get the value of them between 0 & 26
         */
-        for(int k = 0; k < phraseLength; k++) {//Encrypts the message by adding the values in the phrase and the keyword
-            //If k > keyLength, have to 'reset' k using the modulo function
-            if(k >= keywordLength) {
-                phrasePositions.set(k, keywordPositions.get(k % keywordLength) + phrasePositions.get(k));
-            }
-            else {
-                phrasePositions.set(k, keywordPositions.get(k) + phrasePositions.get(k));
-            }
+        for(int k = 0; k < phrasePositions.size(); k++) {//Encrypts the message by adding the values in the phrase and the keyword
+            // k % keywordLength keeps looping through the keyword if the phrase is long than the keyword
+            // Do % 26 to keep all the values between 0-25 inclusively
+            phrasePositions.set(k, (keywordPositions.get(k % keywordLength) + phrasePositions.get(k)) % 26);
         }
 
-        phrase = getStringEncryption(phrasePositions);
+        /* For loop to convert the integer values
+         * stored in phrasePositions into char values
+         * and put them into the encryptionArray
+         */
+        for(int m = 0; m < phrasePositions.size(); m++) {
+            encryptionArray.add(positionToLetter(phrasePositions.get(m)));
+        }
 
+        phrase = getStringEncryption(encryptionArray);
     }
 
     //Method to convert from an ArrayList<Integer> to a string
-    public static String getStringEncryption(ArrayList<Integer> list) {
+    public static String getStringEncryption(ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());//Used to help build the string
-        for(Integer num: list) {
-            builder.append(positionToLetter(list.get(num)));//adds the character value of the number to the end of the string
+        for(Character ch: list) {
+            builder.append(ch);//adds the character value of the number to the end of the string
         }
         return builder.toString();//Return a toString; Will need to set equal to a string
     }
