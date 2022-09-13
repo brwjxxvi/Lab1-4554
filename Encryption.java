@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Encryption {
 
+    // Method to convert a string to only lowercase letters
     public String strip(String phrase) {
         phrase = phrase.replaceAll("[^a-zA-Z]", "").toLowerCase();
         return phrase;
@@ -34,7 +35,7 @@ public class Encryption {
             int posPhrase = letterToPosition(phraseArr[i]); // Gets the ASCII value for phraseArr[i]
             int posKey = letterToPosition(keyArr[i % len]); // Gets the ASCII value for keyArr[i % len]
             int sum = (posPhrase + posKey) % 26;
-            char res = (char) (positionToLetter(sum)); // Gets the character associated with the ASCII value of sum
+            char res = positionToLetter(sum); // Gets the character associated with the ASCII value of sum
             phraseArr[i] = res;
         }
         str = String.valueOf(phraseArr);
@@ -55,12 +56,10 @@ public class Encryption {
             int diff = posPhrase - posKey;
             if (diff < 0) { // Need diff to be between 0 and 25 inclusively
                 diff = 26 + diff;
-                diff = positionToLetter(diff); // Gets character associated with the ASCII value of diff
-                char res = (char) diff;
+                char res = positionToLetter(diff); // Gets character associated with the ASCII value of diff
                 phraseArr[i] = res;
             } else {
-                diff = positionToLetter(diff); // Gets character associated with the ASCII value of diff
-                char res = (char) diff;
+                char res = positionToLetter(diff); // Gets character associated with the ASCII value of diff
                 phraseArr[i] = res;
             }
         }
@@ -68,7 +67,7 @@ public class Encryption {
         return str;
     }
 
-    public char[][] cringe(String text, int keyLen) {
+    public char[][] buckets(String text, int keyLen) {
         char[] textArr = text.toCharArray();
         char[][] multiArr = new char[keyLen][];
         for (int i = 0; i < keyLen; i++) {
@@ -81,10 +80,10 @@ public class Encryption {
             }
             multiArr[i % keyLen][counter] = textArr[i];
         }
-        this.shiftMyBalls(multiArr[0], 12);
-        this.shiftMyBalls(multiArr[1], 8);
-        this.shiftMyBalls(multiArr[2], 24);
-        this.shiftMyBalls(multiArr[4], 9);
+        this.shifter(multiArr[0], 12);
+        this.shifter(multiArr[1], 8);
+        this.shifter(multiArr[2], 24);
+        this.shifter(multiArr[4], 9);
 
         for (int i = 0; i < multiArr.length; i++) {
             System.out.println("\n" + this.strip(java.util.Arrays.toString(multiArr[i])));
@@ -95,7 +94,8 @@ public class Encryption {
 
     }
 
-    public char[] shiftMyBalls(char[] array, int shift) {
+    // Shifts the value of everything; trying to guess the key
+    public char[] shifter(char[] array, int shift) {
         for (int i = 0; i < array.length; i++) {
             char ugh = array[i];
             int bruh = ((ugh - 'a') + shift) % 26 + 'a';
@@ -104,7 +104,13 @@ public class Encryption {
         return array;
     }
 
-    public void BUILDINGCOCK(char[][] stuff) {
+    /* Takes a char[][]
+     * the first [] contains the coded text
+     * the second [] takes the keyword length
+     * and attempts to break the encryption
+     * given a this.buckets(String text, int len) variable
+     */
+    public void breakEncrypt(char[][] stuff) {
         char[] finalArr = new char[stuff[0].length * stuff.length];
         int counter = -1;
         for (int i = 0; i < finalArr.length; i++) {
@@ -118,17 +124,15 @@ public class Encryption {
     }
 
     public static void main(String[] args) {
-        Encryption bruh = new Encryption();
-        System.out.println(bruh.encrypt("icecubes", "I wish to speak a word for Nature, for absolute freedom and wildness, as contrasted with a freedom and culture merely civil, — to regard man as an inhabitant, or a part and parcel of Nature, rather than a member of society. I wish to make an extreme statement, if so I may make an emphatic one, for there are enough champions of civilization: the minister and the school committee and every one of you will take care of that. I have met with but one or two persons in the course of my life who understood the art of Walking, that is, of taking walks, — who had a genius, so to speak, for sauntering: which word is beautifully derived “from idle people who roved about the country, in the Middle Ages, and asked charity, under pretense of going à la Sainte Terre,” to the Holy Land, till the children exclaimed, “There goes a Sainte-Terrer,” a Saunterer, a Holy-Lander. They who never go to the Holy Land in their walks, as they pretend, are indeed mere idlers and vagabonds; but they who do go there are saunterers in the good sense, such as I mean. Some, however, would derive the word from sans terre without land or a home, which, therefore, in the good sense, will mean, having no particular home, but equally at home everywhere. For this is the secret of successful sauntering. He who sits still in a house all the time may be the greatest vagrant of all; but the saunterer, in the good sense, is no more vagrant than the meandering river, which is all the while sedulously seeking the shortest course to the sea. But I prefer the first, which, indeed, is the most probable derivation. For every walk is a sort of crusade, preached by some Peter the Hermit in us, to go forth and reconquer this Holy Land from the hands of the Infidels. It is true, we are but faint-hearted crusaders, even the walkers, nowadays, who undertake no persevering, never-ending enterprises. Our expeditions are but tours, and come round again at evening to the old hearthside from which we set out. Half the walk is but retracing our steps. We should go forth on the shortest walk, perchance, in the spirit of undying adventure, never to return, — prepared to send back our embalmed hearts only as relics to our desolate kingdoms. If you are ready to leave father and mother, and brother and sister, and wife and child and friends, and never see them again, — if you have paid your debts, and made your will, and settled all your affairs, and are a free man, then you are ready for a walk. To come down to my own experience, my companion and I, for I sometimes have a companion, take pleasure in fancying ourselves knights of a new, or rather an old, order, — not Equestrians or Chevaliers, not Ritters or Riders, but Walkers, a still more ancient and honorable class, I trust. The Chivalric and heroic spirit which once belonged to the Rider seems now to reside in, or perchance to have subsided into, the Walker, — not the Knight, but Walker Errant. He is a sort of fourth estate, outside of Church and State and People."));
-        System.out.println(bruh.decrypt("icecubes", "qymubuskxgemuxsjlhsthbxmzgjqlbfkwnyvygvwmfsouohoqnhpytwsaespnsekbghyculsntigxpqsvfgwfuyjmoitymcuqxmnnpvwocvfgbrsacrkhietqvepnpvsxcvvuohhitggfpjfivytyselpgvvbbrsugqdyssxaqgkyucaekwjnpqssgepyyxjmoiunbxwugrvcgwgqoeagbowipiojielqespygsjbjitybvwmpswaigziotkiowgnemxcmmrivmqhulwukrkmuijiphvbfwupqsnwpqeqvxgybrvmxitsprwwhcqoxmdtvemydejmqjvbbxapczggfxoqvldousfmqvvqptwzuspmjrlpggqoswwwhqafjjwejswheijavsqxulwitxqzxedskrinielqushnboaviacflwopqlcxbkwvkyumpxgaricegsjacypnfvaviajcdlowthkmciscvmhompqlgvkpfhxzqqkxmihmqtnyxlgzqzgxbfgcvxjydsmvvvacoxzmomfxmisogwcheeksghebbvabaypxfvhzgxghtigniskhhpsacmpnfxwztiviulwpqpafbrvbkpnniiupkpflfrwfepccnivbjityhswacwccoxwbgvtysekiwrvysijijsnsmeflgvvbfcopqrgpfvywvsvbflgtapchemfbjiklxedsueuniiqxtivyohszgmpxfivugvgcepwzuepxweyidspxtfmbvlgsxlglqkqniijmcvgmbyfbgvgltmfbjiiiphkmpwgmvgziumoybrkwoijixinmtaqomhvmtmxyulweqvfzsseacrunfvjmymvbpyltcrfisezwoiybjgzbjitygsjmkrvbfkgwfwghtioqnpoybrzixmpaoshitxkwvpszjsoycylmsycfmcsbjsoyfzwzaajysixwtxjctmkbjiuydvwbqjuodgwaujwftemvvitcokzmylqmjxkavmnfjrspqyuybpdbjivcnieiafgniiyzgevytxniivchusxinpdouxzmuewhuijmtmpniiywqhuyowwqurqgpvwdcktuoxlpcrvbfqwiphgljryzkzglxlakjmuumplpgajcmikmfynivwdguigejrybjiubpvlmuxeivvkmvsvbfwwidyvcqvwngvvbfjazuxybjgzqphgyemkbjioitxhzqfcvmivmtmxuumgvhstywijgyenejwsaqvviggjcuefyqvwielgxcckwoiryuijbjijysqabkrwmusywhstniefltieioummtxjctlgtapchejjwoxjyieflushniiavhmfymwabkwvlviomcvgvvxxikrvbfejbghelvwslgvuywifbjiyumowzurqqbhsguajivrvmtxcefrgxgvuywijqpkpywijmphkhhifbgvrljwwaqytyytwlkxkiowszgfwnusmzuepxdsemtswheeyikrcnfzwvkrinpxzmqpfbfejbjwkxfjjwoajcdlomuivivxzinjvbfastmmuvvxjmvvcwjrywwvunftkegwjivpvoqjqlulgvvlgmisjbgwvqbpcxgvebbrumkrvbfwhqtmvigyflampabhnmpxwlfrwdgvvisilctrrlftszghvitifldeeepyjmofcfnivpgetntsftaeulfpakuxqivvvmusnuuicqpkfinwanaswusijmchanppwixihuulwzcrfgpxzmtepxcvgbjituohkquxglbrvekjguohupkpfuohxzkipxteflpixyswwmvlggbksqpmhspyzixirujhqwwvfycxkiphoueiqwwvycmpsvfwgnupwlcpnspyjihjccswsvfetybjjmgqchulwvaswusijmchazpvsecpmnpggughqqoxguasyhfbhmtmghdiegesojbrawpepxjjgzkwqgfxaugwjuwiskqqruomgvvemyqpwiuytyjrxipgacokgctwgfwikspmibuwgncrgqpvjivlglbrgtfstxfvfwvisofwlzkepmpvupgzcfjijapsvljxlmtwqlsmvmtwdouastmitmbwlqnpoisisvemghuefljspisettggnutwabtyunulwkjmxumvakcrfbfvgqewrcsmlejmebprumdiniokwlvsvbfvalgvuyfqkvqavisikqfikhpvhmtgjuogwbqlcpfwmjumfyemfbqxjyxedsgvpiuxzmmrkaixtcvacflijmtvchulwqueuisxgnhswlulwavevypylakhgiggzctgjuohkbcxguohhmqtny"));
+        Encryption secret = new Encryption();
+        System.out.println(secret.encrypt("icecubes", "I wish to speak a word for Nature, for absolute freedom and wildness, as contrasted with a freedom and culture merely civil, — to regard man as an inhabitant, or a part and parcel of Nature, rather than a member of society. I wish to make an extreme statement, if so I may make an emphatic one, for there are enough champions of civilization: the minister and the school committee and every one of you will take care of that. I have met with but one or two persons in the course of my life who understood the art of Walking, that is, of taking walks, — who had a genius, so to speak, for sauntering: which word is beautifully derived “from idle people who roved about the country, in the Middle Ages, and asked charity, under pretense of going à la Sainte Terre,” to the Holy Land, till the children exclaimed, “There goes a Sainte-Terrer,” a Saunterer, a Holy-Lander. They who never go to the Holy Land in their walks, as they pretend, are indeed mere idlers and vagabonds; but they who do go there are saunterers in the good sense, such as I mean. Some, however, would derive the word from sans terre without land or a home, which, therefore, in the good sense, will mean, having no particular home, but equally at home everywhere. For this is the secret of successful sauntering. He who sits still in a house all the time may be the greatest vagrant of all; but the saunterer, in the good sense, is no more vagrant than the meandering river, which is all the while sedulously seeking the shortest course to the sea. But I prefer the first, which, indeed, is the most probable derivation. For every walk is a sort of crusade, preached by some Peter the Hermit in us, to go forth and reconquer this Holy Land from the hands of the Infidels. It is true, we are but faint-hearted crusaders, even the walkers, nowadays, who undertake no persevering, never-ending enterprises. Our expeditions are but tours, and come round again at evening to the old hearthside from which we set out. Half the walk is but retracing our steps. We should go forth on the shortest walk, perchance, in the spirit of undying adventure, never to return, — prepared to send back our embalmed hearts only as relics to our desolate kingdoms. If you are ready to leave father and mother, and brother and sister, and wife and child and friends, and never see them again, — if you have paid your debts, and made your will, and settled all your affairs, and are a free man, then you are ready for a walk. To come down to my own experience, my companion and I, for I sometimes have a companion, take pleasure in fancying ourselves knights of a new, or rather an old, order, — not Equestrians or Chevaliers, not Ritters or Riders, but Walkers, a still more ancient and honorable class, I trust. The Chivalric and heroic spirit which once belonged to the Rider seems now to reside in, or perchance to have subsided into, the Walker, — not the Knight, but Walker Errant. He is a sort of fourth estate, outside of Church and State and People."));
+        System.out.println(secret.decrypt("icecubes", "qymubuskxgemuxsjlhsthbxmzgjqlbfkwnyvygvwmfsouohoqnhpytwsaespnsekbghyculsntigxpqsvfgwfuyjmoitymcuqxmnnpvwocvfgbrsacrkhietqvepnpvsxcvvuohhitggfpjfivytyselpgvvbbrsugqdyssxaqgkyucaekwjnpqssgepyyxjmoiunbxwugrvcgwgqoeagbowipiojielqespygsjbjitybvwmpswaigziotkiowgnemxcmmrivmqhulwukrkmuijiphvbfwupqsnwpqeqvxgybrvmxitsprwwhcqoxmdtvemydejmqjvbbxapczggfxoqvldousfmqvvqptwzuspmjrlpggqoswwwhqafjjwejswheijavsqxulwitxqzxedskrinielqushnboaviacflwopqlcxbkwvkyumpxgaricegsjacypnfvaviajcdlowthkmciscvmhompqlgvkpfhxzqqkxmihmqtnyxlgzqzgxbfgcvxjydsmvvvacoxzmomfxmisogwcheeksghebbvabaypxfvhzgxghtigniskhhpsacmpnfxwztiviulwpqpafbrvbkpnniiupkpflfrwfepccnivbjityhswacwccoxwbgvtysekiwrvysijijsnsmeflgvvbfcopqrgpfvywvsvbflgtapchemfbjiklxedsueuniiqxtivyohszgmpxfivugvgcepwzuepxweyidspxtfmbvlgsxlglqkqniijmcvgmbyfbgvgltmfbjiiiphkmpwgmvgziumoybrkwoijixinmtaqomhvmtmxyulweqvfzsseacrunfvjmymvbpyltcrfisezwoiybjgzbjitygsjmkrvbfkgwfwghtioqnpoybrzixmpaoshitxkwvpszjsoycylmsycfmcsbjsoyfzwzaajysixwtxjctmkbjiuydvwbqjuodgwaujwftemvvitcokzmylqmjxkavmnfjrspqyuybpdbjivcnieiafgniiyzgevytxniivchusxinpdouxzmuewhuijmtmpniiywqhuyowwqurqgpvwdcktuoxlpcrvbfqwiphgljryzkzglxlakjmuumplpgajcmikmfynivwdguigejrybjiubpvlmuxeivvkmvsvbfwwidyvcqvwngvvbfjazuxybjgzqphgyemkbjioitxhzqfcvmivmtmxuumgvhstywijgyenejwsaqvviggjcuefyqvwielgxcckwoiryuijbjijysqabkrwmusywhstniefltieioummtxjctlgtapchejjwoxjyieflushniiavhmfymwabkwvlviomcvgvvxxikrvbfejbghelvwslgvuywifbjiyumowzurqqbhsguajivrvmtxcefrgxgvuywijqpkpywijmphkhhifbgvrljwwaqytyytwlkxkiowszgfwnusmzuepxdsemtswheeyikrcnfzwvkrinpxzmqpfbfejbjwkxfjjwoajcdlomuivivxzinjvbfastmmuvvxjmvvcwjrywwvunftkegwjivpvoqjqlulgvvlgmisjbgwvqbpcxgvebbrumkrvbfwhqtmvigyflampabhnmpxwlfrwdgvvisilctrrlftszghvitifldeeepyjmofcfnivpgetntsftaeulfpakuxqivvvmusnuuicqpkfinwanaswusijmchanppwixihuulwzcrfgpxzmtepxcvgbjituohkquxglbrvekjguohupkpfuohxzkipxteflpixyswwmvlggbksqpmhspyzixirujhqwwvfycxkiphoueiqwwvycmpsvfwgnupwlcpnspyjihjccswsvfetybjjmgqchulwvaswusijmchazpvsecpmnpggughqqoxguasyhfbhmtmghdiegesojbrawpepxjjgzkwqgfxaugwjuwiskqqruomgvvemyqpwiuytyjrxipgacokgctwgfwikspmibuwgncrgqpvjivlglbrgtfstxfvfwvisofwlzkepmpvupgzcfjijapsvljxlmtwqlsmvmtwdouastmitmbwlqnpoisisvemghuefljspisettggnutwabtyunulwkjmxumvakcrfbfvgqewrcsmlejmebprumdiniokwlvsvbfvalgvuyfqkvqavisikqfikhpvhmtgjuogwbqlcpfwmjumfyemfbqxjyxedsgvpiuxzmmrkaixtcvacflijmtvchulwqueuisxgnhswlulwavevypylakhgiggzctgjuohkbcxguohhmqtny"));
 
-        char[][] doubleBruh = bruh.cringe(
+        char[][] doubleArr = secret.buckets(
                 "qjapkofclpgauficevhvujgebkgtdjhzctdssphzrvgnrbvvoccgueecjvolblkezgljejhmfyftspacmrknxwfhoiasvifbkaskseuiecjfeihgutlrqvhvvafdvbsupvqluowhzgspglgmjqjapkofclpgauijikgdkctterqzerpdlqgiohjitgweuiwlaspglgmjoffgrwfcctskutfhzgcfblgnkggheeqjapksvoejgsiejsngnztljetfqrtfujcpywumepwkwnbbgynzbsfdzhaqnkcectysectzqsnaeodaszgghcimhvoxfsrhzqsngffavhdgutyghspacmkkszbunuuskvhvglwdpcxuiusujaebwnakhsekjhzctucfqtkojiekkwckeskuejwfvhvqjapkcytagvaeacugtikveutyseuecjwublhapskssfeoddqikkwckeskuejwfvhvwjkmgzwoeehsvifb",
                 5);
 
-        // System.out.println((bruh.strip(java.util.Arrays.toString(bruh.shiftMyBalls(doubleBruh[2],
-        // 24)))));
-        bruh.BUILDINGCOCK(doubleBruh);
+        secret.breakEncrypt(doubleArr);
     }
 
     
