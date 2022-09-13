@@ -1,5 +1,4 @@
 import java.util.*;
-import javax.swing.plaf.synth.SynthInternalFrameUI;
 
 public class Encryption {
 
