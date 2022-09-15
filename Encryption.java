@@ -101,12 +101,17 @@ public class Encryption {
 
     }
 
-    // Shifts the value of everything; trying to guess the key
+    /* Takes a char array and an integer
+     * goes through the char array and
+     * attempts to guess the shift used to encode the text
+     * returns the shifted array
+     */
     public char[] shifter(char[] array, int shift) {
-        for (int i = 0; i < array.length; i++) {
-            char ugh = array[i];
-            int bruh = ((ugh - 'a') + shift) % 26 + 'a';
-            array[i] = (char) bruh;
+        for (int i = 0; i < array.length; i++) { // Goes through the array
+            char curr = array[i]; // Gets the char at array[i]
+            int pos = (letterToPosition(curr) + shift) % 26; // Converts to an ASCII integer value between 0-25 inclusively
+            char res = positionToLetter(pos); // Converts to an a-z character
+            array[i] = res; // Sets array[i] equal to char res
         }
         return array;
     }
