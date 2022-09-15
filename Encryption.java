@@ -67,18 +67,25 @@ public class Encryption {
         return str;
     }
 
+    /* Takes text and key length as input
+     * Create a jagged 2D char array, 'rows' and 'columns'
+     * Jagged array has different # of columns in each row
+     * The first dimension has size equal to the length of the key
+     * The second dimension increments by one, using a
+     * counter to go through the second dimension
+     */
     public char[][] buckets(String text, int keyLen) {
-        char[] textArr = text.toCharArray();
-        char[][] multiArr = new char[keyLen][];
+        char[] textArr = text.toCharArray(); // Creates charArray using String text
+        char[][] multiArr = new char[keyLen][]; // Creates 2D array, stating there is keyLen 'rows'
         for (int i = 0; i < keyLen; i++) {
-            multiArr[i] = new char[text.length()];
+            multiArr[i] = new char[text.length()]; // Each 'row' has size text.length()
         }
         int counter = -1;
         for (int i = 0; i < text.length(); i++) {
-            if (i % keyLen == 0) {
-                counter++;
+            if (i % keyLen == 0) { // If text length = keyLen, then increment counter by 1
+                counter++; // Moves us on to the next 'column' in the array
             }
-            multiArr[i % keyLen][counter] = textArr[i];
+            multiArr[i % keyLen][counter] = textArr[i]; // Puts elements in textArr into multiArr
         }
         this.shifter(multiArr[0], 12);
         this.shifter(multiArr[1], 8);
