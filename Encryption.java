@@ -93,7 +93,7 @@ public class Encryption {
         this.shifter(multiArr[4], 9);
 
         for (int i = 0; i < multiArr.length; i++) {
-            //System.out.println("\n" + this.strip(java.util.Arrays.toString(multiArr[i])));
+            System.out.println("\n" + this.strip(java.util.Arrays.toString(multiArr[i])));
         }
         System.out.println("\n");
 
@@ -109,7 +109,7 @@ public class Encryption {
     public char[] shifter(char[] array, int shift) {
         for (int i = 0; i < array.length; i++) { // Goes through the array
             char curr = array[i]; // Gets the char at array[i]
-            int pos = (letterToPosition(curr) - shift) % 26; // Converts to an ASCII integer value between 0-25 inclusively
+            int pos = (letterToPosition(curr) + shift) % 26; // Converts to an ASCII integer value between 0-25 inclusively
             char res = positionToLetter(pos); // Converts to an a-z character
             array[i] = res; // Sets array[i] equal to char res
         }
@@ -142,8 +142,8 @@ public class Encryption {
         // System.out.println(secret.decrypt("icecubes", "qymubuskxgemuxsjlhsthbxmzgjqlbfkwnyvygvwmfsouohoqnhpytwsaespnsekbghyculsntigxpqsvfgwfuyjmoitymcuqxmnnpvwocvfgbrsacrkhietqvepnpvsxcvvuohhitggfpjfivytyselpgvvbbrsugqdyssxaqgkyucaekwjnpqssgepyyxjmoiunbxwugrvcgwgqoeagbowipiojielqespygsjbjitybvwmpswaigziotkiowgnemxcmmrivmqhulwukrkmuijiphvbfwupqsnwpqeqvxgybrvmxitsprwwhcqoxmdtvemydejmqjvbbxapczggfxoqvldousfmqvvqptwzuspmjrlpggqoswwwhqafjjwejswheijavsqxulwitxqzxedskrinielqushnboaviacflwopqlcxbkwvkyumpxgaricegsjacypnfvaviajcdlowthkmciscvmhompqlgvkpfhxzqqkxmihmqtnyxlgzqzgxbfgcvxjydsmvvvacoxzmomfxmisogwcheeksghebbvabaypxfvhzgxghtigniskhhpsacmpnfxwztiviulwpqpafbrvbkpnniiupkpflfrwfepccnivbjityhswacwccoxwbgvtysekiwrvysijijsnsmeflgvvbfcopqrgpfvywvsvbflgtapchemfbjiklxedsueuniiqxtivyohszgmpxfivugvgcepwzuepxweyidspxtfmbvlgsxlglqkqniijmcvgmbyfbgvgltmfbjiiiphkmpwgmvgziumoybrkwoijixinmtaqomhvmtmxyulweqvfzsseacrunfvjmymvbpyltcrfisezwoiybjgzbjitygsjmkrvbfkgwfwghtioqnpoybrzixmpaoshitxkwvpszjsoycylmsycfmcsbjsoyfzwzaajysixwtxjctmkbjiuydvwbqjuodgwaujwftemvvitcokzmylqmjxkavmnfjrspqyuybpdbjivcnieiafgniiyzgevytxniivchusxinpdouxzmuewhuijmtmpniiywqhuyowwqurqgpvwdcktuoxlpcrvbfqwiphgljryzkzglxlakjmuumplpgajcmikmfynivwdguigejrybjiubpvlmuxeivvkmvsvbfwwidyvcqvwngvvbfjazuxybjgzqphgyemkbjioitxhzqfcvmivmtmxuumgvhstywijgyenejwsaqvviggjcuefyqvwielgxcckwoiryuijbjijysqabkrwmusywhstniefltieioummtxjctlgtapchejjwoxjyieflushniiavhmfymwabkwvlviomcvgvvxxikrvbfejbghelvwslgvuywifbjiyumowzurqqbhsguajivrvmtxcefrgxgvuywijqpkpywijmphkhhifbgvrljwwaqytyytwlkxkiowszgfwnusmzuepxdsemtswheeyikrcnfzwvkrinpxzmqpfbfejbjwkxfjjwoajcdlomuivivxzinjvbfastmmuvvxjmvvcwjrywwvunftkegwjivpvoqjqlulgvvlgmisjbgwvqbpcxgvebbrumkrvbfwhqtmvigyflampabhnmpxwlfrwdgvvisilctrrlftszghvitifldeeepyjmofcfnivpgetntsftaeulfpakuxqivvvmusnuuicqpkfinwanaswusijmchanppwixihuulwzcrfgpxzmtepxcvgbjituohkquxglbrvekjguohupkpfuohxzkipxteflpixyswwmvlggbksqpmhspyzixirujhqwwvfycxkiphoueiqwwvycmpsvfwgnupwlcpnspyjihjccswsvfetybjjmgqchulwvaswusijmchazpvsecpmnpggughqqoxguasyhfbhmtmghdiegesojbrawpepxjjgzkwqgfxaugwjuwiskqqruomgvvemyqpwiuytyjrxipgacokgctwgfwikspmibuwgncrgqpvjivlglbrgtfstxfvfwvisofwlzkepmpvupgzcfjijapsvljxlmtwqlsmvmtwdouastmitmbwlqnpoisisvemghuefljspisettggnutwabtyunulwkjmxumvakcrfbfvgqewrcsmlejmebprumdiniokwlvsvbfvalgvuyfqkvqavisikqfikhpvhmtgjuogwbqlcpfwmjumfyemfbqxjyxedsgvpiuxzmmrkaixtcvacflijmtvchulwqueuisxgnhswlulwavevypylakhgiggzctgjuohkbcxguohhmqtny"));
 
         char[][] doubleArr = secret.buckets(
-                "lgxalyxuofgewbnjoqppzzekymtoijmwcxrkvbnwtaazgueihlksrrrdosnzxvzuokygumrontlmpwutjsyewbnwlekzgjyecqyspaankuthhtunehhillenwwuftdniojionfwmiorbklhaamokairazmpkwbnwwkxlydignbnwpqaxrwbhxwsmpkwivduiumzmscxitvlenwtlhapzgkswwlyeognkoyannbzwswwlkfjkhvglunndoniwwmtbouwizmrarisylwmbukaucpglidjdkwnprzkdyhxazlhwcnguuhcgvwolumzwlhdazzapjzzeagnaaklkemtstqamsgracpgfwauwbwddnzhwfkamzzaprbxwvajtyzenbmijepbbumswwlzzapjnzwrwlixwfquazmduxnigrkcitvckwazsbhnekkeacpofgorvnwrpqizzaznaispamwajoxbmxnaprwteykfvkppaaqkfcarazzapcpkeonnekktqmggjtpqmrwsofmisraowxfapdzkohwcixlrajtrqraemgdspxcyasjjbajeouiicobmmyagjqmxuunrwakcndloliabpkjetczggrzrvgjyixvulojhpkjaxbwrmtaugaffewqyzezlwtviprwtfapdzkzaopwuvijcmtlikwauxckdzywbqciysrebbullaxviwswrlyzeyjvtgtyjzxqtdnuumtsqmtalkxsglahjvjkcwymouajwwzzehyakwijpirdipblkxeycaolioowxlujjbkxondangwaemxlhwcvglunnqykoevxkjfalbgkopqmxoionekkhkdtjzarnpgvnkjzzstwutgjtebwajslrzolezyzuleocwajgwutgftwcbkeppcwzwayqvglunnpkjpnxxkjphjkkssbxzzzeewnofipndgjiacguxnwccxwtdjbokaldzkeypqqzasjxbzgbaowafdewvglunnpkjsaunolrabqjwsewbnwiijoofaprwtgrbjviqonlcrlirjbkvbhrvjfeobwllhavitohkuwucswcpkjcuaqroehugumnanltgthxwqstpqmrsnzbkgheuxcisnhrmuftdnoxssojvjkmktmgfdpjtqnirrittupwizmraraygujlwsxoncihdecaiykioqixvajmlaepujvjvaiyitvfqutuxdnnijxuhktgukewakutofpewvawuujrebxugrabbcgrgvituoqulsskahwasmkamigmbxzzsbhn",
-                4);
+                "qjapkofclpgauficevhvujgebkgtdjhzctdssphzrvgnrbvvoccgueecjvolblkezgljejhmfyftspacmrknxwfhoiasvifbkaskseuiecjfeihgutlrqvhvvafdvbsupvqluowhzgspglgmjqjapkofclpgauijikgdkctterqzerpdlqgiohjitgweuiwlaspglgmjoffgrwfcctskutfhzgcfblgnkggheeqjapksvoejgsiejsngnztljetfqrtfujcpywumepwkwnbbgynzbsfdzhaqnkcectys",
+                5);
 
         secret.breakEncrypt(doubleArr);
     }
